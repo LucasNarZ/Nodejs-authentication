@@ -6,7 +6,7 @@ services:
     volumes:
       - ./data/db:/var/lib/postgresql/data
     ports:
-      - 5032:5032
+      - 5432:5432
 
     environment:
       - POSTGRES_DB=aplication
@@ -17,4 +17,4 @@ services:
     image: adminer
     restart: always
     ports:
-      - 2020:2020
+      - 8080:8080
