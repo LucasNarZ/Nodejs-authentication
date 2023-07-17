@@ -1,18 +1,8 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+  experimental: {
+    serverActions: true,
+  },
+}
 
-module.exports = {
-    // outras configurações
-  
-    module: {
-      rules: [
-        // outras regras de loader
-  
-        {
-          test: /\.html$/,
-          loader: 'html-loader',
-        },
-      ],
-    },
-  };
-  
+module.exports = nextConfig

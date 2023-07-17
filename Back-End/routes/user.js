@@ -8,6 +8,8 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 
+const { body, validationResult } = require('express-validator');
+
 async function searchUserInDB(users, userEmail, userPassword){
     const promises = users.map(async user => {
         return user.email === userEmail && await comparePassword(user.password, userPassword);
@@ -36,7 +38,15 @@ router.get("/user", async (req, res) => {
     }
 })
 
-router.post("/user", async (req, res) => {
+router.post("/user", [
+    body("name").trim().matches(/^[A-Za-z]+$/).escape(),
+    body("email").trim().isEmail().matches(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/).escape(),
+    body("password").trim().matches(/^.{8,}$/s).matches(/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[\W_]).*$/).escape()
+],async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()){
+        return res.status(400).json({message: "An error occured"});
+    }
     const { name, email, password }= req.body;
     try{
         const existingUser = await prisma.User.findFirst({
@@ -46,7 +56,7 @@ router.post("/user", async (req, res) => {
           });
       
           if (existingUser) {
-            return res.status(409).json({ message: "Usuário já cadastrado" });
+            return res.status(409).json({ message: "User already Registered" });
           }
         const hashedPassword = await argon2.hash(password, {
             type: argon2.argon2id,

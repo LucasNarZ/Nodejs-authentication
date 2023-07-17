@@ -1,23 +1,23 @@
-"use client"
+"use client";
 
 import React from "react";
 import { Container, Box, TextField, Button } from "@mui/material";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 
+
+
 export default function Home() {
     const { register, handleSubmit, formState:{errors} } = useForm();
-
     
+
+
+
 
     interface User{
         email:string;
         password:string;
     }
-
-
-    
-
 
     const onSubmit = async (data:any) => {
         try{
@@ -27,7 +27,6 @@ export default function Home() {
         }catch(err){
             console.error(err);
         }
-        
     }
 
     return (
