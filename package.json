@@ -4,17 +4,41 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "cd Front-End/authentication-front-end && next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "jest",
+    "server": "cd Back-End && node server.ts"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.0",
+    "@mui/material": "^5.14.0",
     "@prisma/client": "^5.0.0",
+    "@types/node": "20.4.2",
+    "argon2": "^0.30.3",
+    "autoprefixer": "10.4.14",
     "axios": "^1.4.0",
+    "axios-mock-adapter": "^1.21.5",
+    "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "html-loader": "^4.2.0",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
-    "prisma": "^5.0.0"
+    "prisma": "^5.0.0",
+    "react-hook-form": "^7.45.1"
+  },
+  "devDependencies": {
+    "jest": "^29.6.1"
+  },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false
   }
 }
