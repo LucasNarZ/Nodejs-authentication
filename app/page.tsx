@@ -52,7 +52,7 @@ export default function Home() {
             return
         }
         try{
-            const newUser = await axios.post("http://localhost:3006/user", data)
+            const newUser = await axios.post("http://localhost:3000/user", data)
             console.log(newUser);
         }catch(err:any){
             if(err.response && err.response.status === 409){
@@ -71,18 +71,18 @@ export default function Home() {
                     <h1 className="text-4xl text-black my-7" >Register</h1>
                     <form className="w-full h-full flex flex-col  items-center relative" onSubmit={handleSubmit(onSubmit)}>
 
-                        <TextField label="Name" id="name" variant="outlined"  className="mt-5 max-w-[800px] w-[90%]" error={!!errors.name} helperText={!!errors.name ? "Name is Invalid" : ""} {...register("name", {required:true, pattern:/^[A-Za-z]+$/})} />
+                        <TextField label="Name" id="name" variant="outlined"  className="max-w-[800px] w-[90%]" error={!!errors.name} helperText={!!errors.name ? "Name is Invalid" : ""} {...register("name", {required:true, pattern:/^[A-Za-z]+$/})} margin="dense"/>
 
-                        <TextField label="Email" id="email" variant="outlined"  className="mt-5 max-w-[800px] w-[90%]" error={!!errors.email || emailExists} helperText={!!errors.email ? "Invalid Email" : emailExists ? "Email Already Registered" : ""} {...register("email", {required:true, pattern:/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/})} onChange={() => setEmailExists(false)}/>
+                        <TextField label="Email" id="email" variant="outlined"  className="max-w-[800px] w-[90%]" error={!!errors.email || emailExists} helperText={!!errors.email ? "Invalid Email" : emailExists ? "Email Already Registered" : ""} {...register("email", {required:true, pattern:/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/})} onChange={() => setEmailExists(false)} margin="dense"/>
 
-                        <TextField label="Password" id="password" variant="outlined"  className="mt-5 max-w-[800px] w-[90%]" type="password" error={!validPassword}  helperText={!validPassword ? "Invalid Password" : ""} {...register("password", {required:true})} onChange={(e) => setPassword(e.target.value)}/>
+                        <TextField label="Password" id="password" variant="outlined"  className="max-w-[800px] w-[90%]" type="password" error={!validPassword}  helperText={!validPassword ? "Invalid Password" : ""} {...register("password", {required:true})} onChange={(e) => setPassword(e.target.value)} margin="dense"/>
 
 
                         <CheckPassword value="Minimum 8 characters" state={validInput1}/>
                         <CheckPassword value="Include letters, numbers, and symbols" state={validInput2}/>
 
                         
-                        <TextField label="Repeat Password" id="passwordRep" variant="outlined"  className="mt-5 max-w-[800px] w-[90%]" type="password" onChange={(e) => setRepPassword(e.target.value)} error={password !== repPassword} helperText={password !== repPassword ? "Passwords don't match" : ""}/>
+                        <TextField label="Repeat Password" id="passwordRep" variant="outlined"  className="max-w-[800px] w-[90%]" type="password" onChange={(e) => setRepPassword(e.target.value)} error={password !== repPassword} helperText={password !== repPassword ? "Passwords don't match" : ""} margin="dense"/>
 
                         <ReCAPTCHA
                         sitekey="6LekBjAnAAAAAFDeyZ06aAvF8-WdW4ebruo7rNde"
