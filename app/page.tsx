@@ -47,12 +47,9 @@ export default function Home() {
 
 
     const onSubmit = async (data:any) => {
-        if(!isVerified){
-            alert("Please complete the CAPTCHA")
-            return
-        }
+
         try{
-            const newUser = await axios.post("http://localhost:3000/user", data)
+            const newUser = await axios.post("http://localhost:3002/user", data)
             console.log(newUser);
         }catch(err:any){
             if(err.response && err.response.status === 409){
@@ -66,7 +63,7 @@ export default function Home() {
     }
     return (
         <React.Fragment>
-            <Box className="w-screen min-h-screen bg-gray-200 flex items-center justify-center">
+            <Box className="w-screen min-h-screen h-full py-20  bg-gray-200 flex items-center justify-center">
                 <Container maxWidth="sm" className="bg-white h-[700px] rounded-lg flex flex-col items-center">
                     <h1 className="text-4xl text-black my-7" >Register</h1>
                     <form className="w-full h-full flex flex-col  items-center relative" onSubmit={handleSubmit(onSubmit)}>
@@ -91,7 +88,9 @@ export default function Home() {
                         className="mt-5 "
                         />
 
-                        <Button type="submit" variant="outlined" className="absolute bottom-10 left-[50%] translate-x-[-50%] w-[100px]">Register</Button>
+                        <Button type="submit" variant="outlined" className="absolute bottom-10 left-[50%] translate-x-[-50%] w-[100px]" sx={{
+                            position:"absolute",
+                        }}>Register</Button>
                     </form>
 
                 </Container>

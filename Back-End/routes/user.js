@@ -78,6 +78,7 @@ router.post("/user/login", async (req, res) => {
     try{
         const { email, password } = req.body;
         const users = await prisma.User.findMany();
+        console.log("aaaaaaaaaaaaaaaa")
         const isUserRegistered = await searchUserInDB(users, email, password);
         res.json(isUserRegistered);
     }catch(err){
